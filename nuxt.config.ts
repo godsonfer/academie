@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import eslintPlugin from 'vite-plugin-eslint';
+import { inject } from '@vercel/analytics';
+
 import languages from './lang/languages'
 import theme from './config/theme'
 import brand from './assets/text/brand'
@@ -8,7 +10,9 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   devtools: { timeline: { enabled: true } },
   nitro: {
-    prerender: ['/index']
+    prerender: {
+      routes: ['/'],
+    },
   },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
