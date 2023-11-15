@@ -4,7 +4,7 @@
       <div>
         <main-header invert />
         <Error :error-code="errObj.statusCode" :text="$t('common.404')" />
-        <div> {{ errObj.statusMessage }}</div>
+
         <main-footer />
       </div>
     </v-app>
