@@ -1,0 +1,178 @@
+// This is your Prisma schema file,
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin-arm64"]
+  output        = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+}
+
+model Course {
+  id             String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cover          String
+  isFree         Boolean          @default(false)
+  prerequis      Json
+  projects       Json
+  ortherInfo     Json
+  slug           String
+  level          Json[]
+  whatToLearn    Json[]
+  draft          Boolean          @default(true)
+  price          Float            @default(50)
+  code           Int              @default(0)
+  nbrStudent     Int              @default(0)
+  desc           String
+  note           Int              @default(3)
+  reference      String
+  title          String
+  version        Int              @default(1)
+  published      DateTime         @default(now())
+  chapters       Chapter[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  CoursePurchase CoursePurchase[]
+  Category       Category[]
+  User           User[]
+}
+
+model Chapter {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title     String
+  reference String
+  slug      String
+  desc      String
+  draft     Boolean  @default(true)
+  lessons   Lesson[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Course    Course?  @relation(fields: [courseId], references: [id])
+  courseId  String?  @db.Uuid
+}
+
+model Lesson {
+  id             String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title          String
+  reference      String
+  draft          Boolean          @default(true)
+  slug           String
+  published      DateTime         @default(now())
+  desc           String
+  nbrView        Int              @default(0)
+  isFree         Boolean          @default(false)
+  sourceUrl      String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  LessonProgress LessonProgress[]
+  Quizz          LessonQuizz[]
+  Comment        Comment[]
+  Favorite       Favorite[]
+  Chapter        Chapter?         @relation(fields: [chapterId], references: [id])
+  chapterId      String?          @db.Uuid
+}
+
+model Comment {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  message   String
+  from      String
+  reference String
+  imageUrl  String
+  deleted   Boolean  @default(false)
+  solved    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Lesson    Lesson?  @relation(fields: [lessonId], references: [id])
+  lessonId  String?  @db.Uuid
+}
+
+model LessonQuizz {
+  id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  question  Question[]
+  reference String
+  responses String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Lesson    Lesson?    @relation(fields: [lessonId], references: [id])
+  lessonId  String?    @db.Uuid
+}
+
+model Question {
+  id            String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  question      String
+  reference     String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  LessonQuizz   LessonQuizz? @relation(fields: [lessonQuizzId], references: [id])
+  lessonQuizzId String?      @db.Uuid
+}
+
+model Badge {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  reference String
+  role      String
+  author    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LessonProgress {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now())
+  reference String
+  updatedAt DateTime @updatedAt
+  completed Boolean  @default(false)
+  userEmail String
+  Lesson    Lesson?  @relation(fields: [lessonId], references: [id])
+  lessonId  String?  @db.Uuid
+
+  @@unique([lessonId, userEmail])
+}
+
+model CoursePurchase {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  reference String
+  userEmail String
+  verified  Boolean  @default(false)
+  paymentId String   @unique
+  Course    Course?  @relation(fields: [courseId], references: [id])
+  courseId  String?  @db.Uuid
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? @db.Uuid
+}
+
+model User {
+  id            String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email         String     @unique
+  name          String?
+  Favorite      Favorite[]
+  readingCourse Course     @relation(fields: [courseId], references: [id])
+  courseId      String     @db.Uuid
+
+  reference String
+  purchass  CoursePurchase[]
+}
+
+model Favorite {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  User      User?   @relation(fields: [userId], references: [id])
+  userId    String? @db.Uuid
+  reference String
+  Lesson    Lesson? @relation(fields: [lessonId], references: [id])
+  lessonId  String? @db.Uuid
+}
+
+model Category {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  reference String
+  Course    Course? @relation(fields: [courseId], references: [id])
+  courseId  String? @db.Uuid
+}

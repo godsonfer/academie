@@ -1,0 +1,38 @@
+.v-card {
+  transition: opacity 0.4s ease-in-out;
+}
+.show-btns {
+  color: rgba(255, 255, 255, 1) !important;
+}
+.v-card--reveal {
+  bottom: 0;
+  background-color: rgb(2, 21, 44);
+  color: aliceblue;
+  opacity: 1 !important;
+  position: absolute !important;
+  width: 100% !important;
+}
+.v-card--reveal {
+  transition: opacity 0.3s;
+}
+.hover {
+  opacity: 0.5;
+  transition: opacity ease-in 0.3s;
+}
+.action-icon {
+  margin-top: -40%;
+  margin-left: 43%;
+  position: absolute !important;
+  width: 100%;
+}
+.show-btns {
+  margin-top: -35%;
+  margin-left: 40%;
+  justify-content: center;
+  justify-items: center;
+  background-color: rgb(157, 9, 9);
+  color: rgb(243, 83, 15);
+  opacity: 0.9 !important;
+  position: absolute;
+  width: 100%;
+}
