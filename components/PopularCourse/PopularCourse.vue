@@ -63,7 +63,7 @@ export default {
   },
   props: {
     courses: {
-      type: [],
+      type: Array,
       required: true
     }
   },
