@@ -4,13 +4,8 @@
       <div class="figure">
         <div v-if="loaded">
           <scroll-parallax :speed="0.5">
-            <svg
-              fill="#cccccc"
-              width="902px"
-              height="1042px"
-              class="parallax-vertical parallax-dot"
-            >
-              <use xlink:href="/images/decoration/dot-deco.svg#dot" />
+            <svg fill="#cccccc" width="902px" height="1042px" class="parallax-vertical parallax-dot">
+              <use xlink:href="/images/decoration/dot-deco.svg" />
             </svg>
           </scroll-parallax>
         </div>
