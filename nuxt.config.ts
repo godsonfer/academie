@@ -10,11 +10,10 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   devtools: { timeline: { enabled: true } },
   nitro: {
-    prerender: {
+    generate: {
       routes: ['/'],
     },
   },
-  ssr: true,
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
