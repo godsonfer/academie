@@ -2,10 +2,14 @@
   <v-snackbar v-model="snackbar" :timeout="60000" class="notification smart">
     <div class="d-sm-flex align-center me-2">
       <div class="action me-4">
-        <h1 class="text-h5">PROMOTION</h1>
+        <div class="text-h5">BLACK FRIDAY</div>
+        <v-alert type="success" variant="outlined">
+          Profitez de <h1>-70 </h1> de réduction sur nos formations
+        </v-alert>
+
       </div>
       <v-btn color="secondary" class="button" @click="snackbar = false">
-        {{ $t('common.accept') }}
+        <a href="https://wa.me/message/7IZ5EBC2A7AVJ1" target="_blank">Profiter</a>
       </v-btn>
     </div>
   </v-snackbar>
