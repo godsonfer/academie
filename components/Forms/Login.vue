@@ -15,7 +15,7 @@
       </v-spacer>
       <div class="spacer">
         <p>
-          Veuillez selectionnez Google pour vous connecter avec votre compte Gmail
+          Les connexions à la plateforme ne sont pas encore prêtes
         </p>
       </div>
       <!-- <v-form ref="form" v-model="valid">

@@ -15,7 +15,7 @@
       </v-spacer>
       <div class="spacer">
         <p>
-          Veuillez selectionnez Google pour vous inscrire avec votre compte Gmail
+          Les inscriptions à la plateforme ne sont pas encore prêtes
         </p>
       </div>
       <!-- <div class="separator">
