@@ -10,7 +10,7 @@
           {{ $t('common.register_already') }}
         </v-btn>
       </div>
-      <social-auth />
+      <!-- <social-auth /> -->
       <v-spacer class="mt-4">
       </v-spacer>
       <div class="spacer">
