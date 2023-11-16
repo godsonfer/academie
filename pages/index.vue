@@ -114,6 +114,7 @@ const storedLang = useCookie('i18n_redirected');
 const i18nLocale = useI18n();
 const defaultLocale = '/' + i18nLocale.fallbackLocale.value;
 const user = useSupabaseUser()
+console.log(user)
 onMounted(async () => {
   await useCourses()
   const rootUrl = document.location.pathname === '/' || document.location.pathname === defaultLocale;
