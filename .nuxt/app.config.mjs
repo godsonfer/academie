@@ -4,7 +4,7 @@ import { defuFn } from '/home/lta/academie/node_modules/defu/dist/defu.mjs'
 
 const inlineConfig = {
   "nuxt": {
-    "buildId": "test"
+    "buildId": "a6b74174-e862-455b-9554-1e3352c89cd4"
   }
 }
 
